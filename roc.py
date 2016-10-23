@@ -33,61 +33,11 @@ def generate_roc(scoreMatrix,trueLabels,nROCpts =100 ,plotROC = 'false',name='ro
     if(plotROC == 'true'):
         plt.xlim(min(fpr[0,:]), max(fpr[0,:]))
         plt.plot(fpr[0,:],tpr[0,:], 'b.-')
+        plt.ylabel("True Positive Rate")
+        plt.xlabel("False Positive Rate")
         plt.savefig(name)
         # plt.show()
 
     return fpr,tpr,thdArr
                              
-
-
-
-
-# Driving script Checked with random intialization
-# n_classes = 3
-# n_pts = 5
-# trueLabels  = np.zeros([n_classes,n_pts])
-# scoreMatrix = np.zeros([n_classes,n_pts])
-
-# scoreMatrix[0,0]= 1
-# scoreMatrix[0,1]= 2
-# scoreMatrix[0,2]= 3
-# scoreMatrix[0,3]= 4
-# scoreMatrix[0,4]= 5
-
-
-# scoreMatrix[1,0]= 2
-# scoreMatrix[1,1]= 4
-# scoreMatrix[1,2]= 5
-# scoreMatrix[1,3]= 3
-# scoreMatrix[1,4]= 1
-
-# scoreMatrix[2,0]= 4
-# scoreMatrix[2,1]= 5
-# scoreMatrix[2,2]= 1
-# scoreMatrix[2,3]= 2
-# scoreMatrix[2,4]= 3
-
-# trueLabels[0,0]= 0
-# trueLabels[0,1]= 0
-# trueLabels[0,2]= 1
-# trueLabels[0,3]= 0
-# trueLabels[0,4]= 0
-
-# trueLabels[1,0]= 0
-# trueLabels[1,1]= 1
-# trueLabels[1,2]= 0
-# trueLabels[1,3]= 0
-# trueLabels[1,4]= 1
-
-# trueLabels[2,0]= 1
-# trueLabels[2,1]= 0
-# trueLabels[2,2]= 0
-# trueLabels[2,3]= 1
-# trueLabels[2,4]= 0
-
-# print scoreMatrix
-# print trueLabels
-# fpr,tpr,thdArr = generate_roc(scoreMatrix,trueLabels,nROCpts =100 ,plotROC = 'true')
-
-
 

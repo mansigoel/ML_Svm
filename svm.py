@@ -164,6 +164,7 @@ for item in grid_params['C']:
         print "recommended C value"
         joblib.dump(clf, 'part(a)_model.pkl')
         smatrix = clf.decision_function(data1['test']['X'])
+        smatrix = np.reshape(smatrix, (smatrix.shape[0],1))
         print "shape is ", smatrix.shape
         val1,val2,val3 = generate_roc(smatrix,Y1btest,nROCpts =100 ,plotROC = 'true', name= 'Roc_1(a).png')
         all1.append([str(val1),str(val2),str(val3)])
