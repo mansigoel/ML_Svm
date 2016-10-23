@@ -85,10 +85,62 @@ Ytrain = np.array(Ytrain)
 Xtest = np.array(Xtest)
 Ytest = np.array(Ytest)
 
-Ytbrain = label_binarize(Ytrain, classes = np.unique(Ytrain))
-Ytbest = label_binarize(Ytest, classes = np.unique(Ytest))
-
 Xtrain,Ytrain = shuffle(Xtrain,Ytrain)
 Xtest, Ytest = shuffle(Xtest,Ytest)
 
+Ytbrain = label_binarize(Ytrain, classes = np.unique(Ytrain))
+Ytbest = label_binarize(Ytest, classes = np.unique(Ytest))
 
+all1 = []
+all1.append(['Analysis For Multi class'])
+print "multi-class"
+
+grid_params = {'kernel': ['linear'], 'C': [1e-7, 1e-5, 1e-3, 1, 10, 100, 1000]}
+score = 'accuracy'
+print("# Scoring parameter is %s" % score)
+all1.append([score])
+
+clf = GridSearchCV(SVC(max_iter = 10000), grid_params, cv=5, scoring='%s' % score)
+clf.fit(Xtrain, Ytrain)
+
+print("Best parameters set: ")
+print(clf.best_params_)
+best = clf.best_params_
+all1.append([str(clf.best_params_['C'])])
+
+data_multi = {'train': {'X': Xtrain,'y': Ytrain},'test': {'X': Xtest,'y': Ytest}}
+all1.append([''])
+all1.append(['Accuracy Values'])
+try:
+    for item in grid_params['C']:
+        print "for Cval = " + str(item) + " accuracy is "
+        all1.append([str(item)])
+
+        clf = OneVsRestClassifier(SVC(probability=False,cache_size=200,kernel="linear", max_iter = 10000, C=item),-1)
+        req = len(data1['train']['X'])
+        clf.fit(data1['train']['X'][:req], data1['train']['y'][:req])
+        yt =  clf.predict(data1['test']['X'])
+        acc = accuracy_score(data1['test']['y'], yt)
+        print acc
+        all1.append([acc])
+
+        if item==best['C']:
+            all1.append(['recommended C value'])
+            print "recommended C value"
+            joblib.dump(clf, 'part(b)_model.pkl')
+            smatrix = clf.decision_function(data1['test']['X'])
+            smatrix = np.reshape(smatrix, (smatrix.shape[0],10))
+            print "shape is ", smatrix.shape
+            val1,val2,val3 = generate_roc(smatrix,Ytbest,nROCpts =100 ,plotROC = 'true', name= 'Roc_1(b).png')
+            all1.append([str(val1),str(val2),str(val3)])
+        all1.append([''])
+
+        print "--------------------------------------------------------------------------------------------------"
+except Exception,e:
+    print e
+
+with open('analysis(1b).csv', 'w') as fp:
+    a = csv.writer(fp, delimiter=',')
+    a.writerows(all1)
+
+print "end@@@@@@@@@@@"

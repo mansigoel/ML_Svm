@@ -112,15 +112,12 @@ Ytest = np.array(Ytest)
 X1test = np.array(X1test)
 Y1test = np.array(Y1test)
 
-Y1btrain = label_binarize(Y1train, classes = np.unique(Y1train))
-Ytbrain = label_binarize(Ytrain, classes = np.unique(Ytrain))
-Ytbest = label_binarize(Ytest, classes = np.unique(Ytest))
-Y1btest = label_binarize(Y1test, classes = np.unique(Y1test))
-
 Xtrain,Ytrain = shuffle(Xtrain,Ytrain)
 X1train, Y1train = shuffle(X1train,Y1train)
 Xtest, Ytest = shuffle(Xtest,Ytest)
 X1test, Y1test = shuffle(X1test,Y1test)
+
+Y1btest = label_binarize(Y1test, classes = np.unique(Y1test))
 
 
 all1 = []
@@ -148,7 +145,7 @@ all1.append(['Accuracy Values'])
 data1 = {'train': {'X': X1train,'y': Y1train},'test': {'X': X1test,'y': Y1test}}
 
 for item in grid_params['C']:
-    print "for C = " + str(item) + "accuracy ="
+    print "for C = " + str(item) + " accuracy ="
     all1.append([str(item)])
     
     clf = SVC(probability=False,kernel="linear", C=item)
