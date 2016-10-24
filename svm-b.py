@@ -20,7 +20,7 @@ from sklearn.svm import SVC
 from sklearn.cross_validation import train_test_split
 from sklearn.cross_validation import cross_val_score
 from sklearn.metrics import accuracy_score
-
+from pprint import pformat
 """
 Source to read dataset: https://gist.github.com/akesling/5358964
 
@@ -107,35 +107,37 @@ print("Best parameters set: ")
 print(clf.best_params_)
 best = clf.best_params_
 all1.append([str(clf.best_params_['C'])])
-
-data_multi = {'train': {'X': Xtrain,'y': Ytrain},'test': {'X': Xtest,'y': Ytest}}
+error = clf.grid_scores_
+print pformat(error)
+data1 = {'train': {'X': Xtrain,'y': Ytrain},'test': {'X': Xtest,'y': Ytest}}
 all1.append([''])
 all1.append(['Accuracy Values'])
 try:
-    for item in grid_params['C']:
-        print "for Cval = " + str(item) + " accuracy is "
-        all1.append([str(item)])
+    # print "for Cval = " + str(item) + " accuracy is "
+    all1.append([str(best['C'])])
+    clf = OneVsRestClassifier(SVC(probability=False,cache_size=200,kernel="linear", max_iter = 10000, C=best['C']),-1)
+    req = len(data1['train']['X'])
+    clf.fit(data1['train']['X'][:req], data1['train']['y'][:req])
+    yt =  clf.predict(data1['test']['X'])
+    acc = accuracy_score(data1['test']['y'], yt)
+    print acc
+    all1.append([acc])
+    all1.append(['recommended C value'])
+    print "recommended C value"
+    joblib.dump(clf, '2014062_Models/part(b).model',compress=1)
+    i=0
+    for model in clf.estimators_:
+        print i
+        joblib.dump(model, '2014062_Models/part(b)-'+str(i)+'.model', compress =1)
+        i+=1
 
-        clf = OneVsRestClassifier(SVC(probability=False,cache_size=200,kernel="linear", max_iter = 10000, C=item),-1)
-        req = len(data1['train']['X'])
-        clf.fit(data1['train']['X'][:req], data1['train']['y'][:req])
-        yt =  clf.predict(data1['test']['X'])
-        acc = accuracy_score(data1['test']['y'], yt)
-        print acc
-        all1.append([acc])
-
-        if item==best['C']:
-            all1.append(['recommended C value'])
-            print "recommended C value"
-            joblib.dump(clf, 'part(b)_model.pkl')
-            smatrix = clf.decision_function(data1['test']['X'])
-            smatrix = np.reshape(smatrix, (smatrix.shape[0],10))
-            print "shape is ", smatrix.shape
-            val1,val2,val3 = generate_roc(smatrix,Ytbest,nROCpts =100 ,plotROC = 'true', name= 'Roc_1(b).png')
-            all1.append([str(val1),str(val2),str(val3)])
-        all1.append([''])
-
-        print "--------------------------------------------------------------------------------------------------"
+    smatrix = clf.decision_function(data1['test']['X'])
+    smatrix = np.reshape(smatrix, (smatrix.shape[0],10))
+    print "shape is ", smatrix.shape
+    val1,val2,val3 = generate_roc(smatrix,Ytbest,nROCpts =100 ,plotROC = 'true', name= 'Roc_1(b).png')
+    all1.append([str(val1),str(val2),str(val3)])
+    all1.append([''])
+    print "--------------------------------------------------------------------------------------------------"
 except Exception,e:
     print e
 

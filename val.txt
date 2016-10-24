@@ -1,0 +1,31 @@
+[8 3 8 ..., 3 3 8]
+binary-CLASS
+# Scoring parameter is accuracy
+Best parameters set: 
+{'kernel': 'linear', 'C': 0.001}
+[mean: 0.87250, std: 0.00647, params: {'kernel': 'linear', 'C': 1e-08},
+ mean: 0.87250, std: 0.00647, params: {'kernel': 'linear', 'C': 1e-06},
+ mean: 0.95900, std: 0.01059, params: {'kernel': 'linear', 'C': 0.001},
+ mean: 0.95850, std: 0.00804, params: {'kernel': 'linear', 'C': 1},
+ mean: 0.95075, std: 0.00816, params: {'kernel': 'linear', 'C': 10},
+ mean: 0.95075, std: 0.00816, params: {'kernel': 'linear', 'C': 100}]--------------------------------------------------------------------------------------------------
+for C = 0.001 accuracy =
+0.964
+recommended C value
+shape is  (1000, 1)
+--------------------------------------------------------------------------------------------------
+
+
+multi-class
+# Scoring parameter is accuracy
+/usr/local/lib/python2.7/dist-packages/sklearn/svm/base.py:224: ConvergenceWarning: Solver terminated early (max_iter=10000).  Consider pre-processing your data with StandardScaler or MinMaxScaler.
+  % self.max_iter, ConvergenceWarning)
+Best parameters set: 
+{'kernel': 'linear', 'C': 1}
+[mean: 0.67895, std: 0.00394, params: {'kernel': 'linear', 'C': 1e-07},
+ mean: 0.67895, std: 0.00394, params: {'kernel': 'linear', 'C': 1e-05},
+ mean: 0.90825, std: 0.00625, params: {'kernel': 'linear', 'C': 0.001},
+ mean: 0.92335, std: 0.00567, params: {'kernel': 'linear', 'C': 1},
+ mean: 0.91200, std: 0.00455, params: {'kernel': 'linear', 'C': 10},
+ mean: 0.91110, std: 0.00461, params: {'kernel': 'linear', 'C': 100},
+ mean: 0.91110, std: 0.00461, params: {'kernel': 'linear', 'C': 1000}]

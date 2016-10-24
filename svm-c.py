@@ -20,6 +20,7 @@ from sklearn.svm import SVC
 from sklearn.cross_validation import train_test_split
 from sklearn.cross_validation import cross_val_score
 from sklearn.metrics import accuracy_score
+from pprint import pformat
 
 """
 Source to read dataset: https://gist.github.com/akesling/5358964
@@ -95,7 +96,7 @@ all1 = []
 all1.append(['Analysis For Multi class Rbf kernel'])
 print "multi-class Rbf kernel"
 
-grid_params = {'kernel': ['rbf'], 'C': [1e-5, 1e-2, 1, 10, 100, 1000],'gamma': [1e-5, 1e-2,1e-1,1, 10, 100, 1000]}
+grid_params = {'kernel': ['rbf'], 'C': [1, 10, 100],'gamma': [1e-2, 1, 10]}
 score = 'accuracy'
 print("# Scoring parameter is %s" % score)
 all1.append([score])
@@ -107,8 +108,10 @@ print("Best parameters set: ")
 print(clf.best_params_)
 best = clf.best_params_
 all1.append([str(clf.best_params_)])
+error = clf.grid_scores_
+print pformat(error)
 
-data_multi = {'train': {'X': Xtrain,'y': Ytrain},'test': {'X': Xtest,'y': Ytest}}
+data1 = {'train': {'X': Xtrain,'y': Ytrain},'test': {'X': Xtest,'y': Ytest}}
 all1.append([''])
 all1.append(['Accuracy Values'])
 try:
@@ -124,7 +127,12 @@ try:
     all1.append([acc])    
     all1.append(['recommended C value'])
     print "recommended C value"
-    joblib.dump(clf, 'part(c)_model.pkl')
+    joblib.dump(clf, '2014062_Models/part(c).model',compress=1)
+    i=0
+    for model in clf.estimators_:
+        print i
+        joblib.dump(model, '2014062_Models/part(c)-'+str(i)+'.model', compress =1)
+        i+=1
     smatrix = clf.decision_function(data1['test']['X'])
     smatrix = np.reshape(smatrix, (smatrix.shape[0],10))
     print "shape is ", smatrix.shape

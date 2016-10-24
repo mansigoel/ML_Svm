@@ -35,6 +35,7 @@ def generate_roc(scoreMatrix,trueLabels,nROCpts =100 ,plotROC = 'false',name='ro
         plt.plot(fpr[0,:],tpr[0,:], 'b.-')
         plt.ylabel("True Positive Rate")
         plt.xlabel("False Positive Rate")
+        plt.title(name)
         plt.savefig(name)
         # plt.show()
 
