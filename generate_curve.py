@@ -127,7 +127,7 @@ data1 = {'train': {'X': X1train,'y': Y1train},'test': {'X': X1test,'y': Y1test}}
 print 
 # all1.append(['recommended C value'])
 print "recommended C value"
-clf = joblib.load('part(a)_model.pkl')
+clf = joblib.load('part-b_model.pkl')
 smatrix = clf.decision_function(data1['test']['X'])
 yt =  clf.predict(data1['test']['X'])
 acc = accuracy_score(data1['test']['y'], yt)
@@ -137,5 +137,5 @@ Y1btest = label_binarize(Y1test, classes = np.unique(Y1test))
 # print Y1btest
 smatrix = np.reshape(smatrix, (smatrix.shape[0],1))
 print "shape is ", smatrix.shape
-val1,val2,val3 = generate_roc(smatrix,Y1btest,nROCpts =100 ,plotROC = 'true', name= 'Roc_1(a).png')
+val1,val2,val3 = generate_roc(smatrix,Y1btest,nROCpts =100 ,plotROC = 'true', name= 'Roc_1(b).png')
 # all1.append([str(val1),str(val2),str(val3)])
