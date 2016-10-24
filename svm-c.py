@@ -95,7 +95,7 @@ all1 = []
 all1.append(['Analysis For Multi class Rbf kernel'])
 print "multi-class Rbf kernel"
 
-grid_params = [{'kernel': ['rbf'], 'gamma': [1e-5, 1e-2,1e-1,1, 10, 100, 1000],'C': [1e-5, 1e-2, 1, 10, 100, 1000]}
+grid_params = {'kernel': ['rbf'], 'C': [1e-5, 1e-2, 1, 10, 100, 1000],'gamma': [1e-5, 1e-2,1e-1,1, 10, 100, 1000]}
 score = 'accuracy'
 print("# Scoring parameter is %s" % score)
 all1.append([score])
