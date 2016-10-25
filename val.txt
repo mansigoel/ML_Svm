@@ -1,19 +1,21 @@
-[8 3 8 ..., 3 3 8]
+[3 8 3 ..., 3 8 3]
 binary-CLASS
 # Scoring parameter is accuracy
 Best parameters set: 
 {'kernel': 'linear', 'C': 0.001}
-[mean: 0.87250, std: 0.00647, params: {'kernel': 'linear', 'C': 1e-08},
- mean: 0.87250, std: 0.00647, params: {'kernel': 'linear', 'C': 1e-06},
- mean: 0.95900, std: 0.01059, params: {'kernel': 'linear', 'C': 0.001},
- mean: 0.95850, std: 0.00804, params: {'kernel': 'linear', 'C': 1},
- mean: 0.95075, std: 0.00816, params: {'kernel': 'linear', 'C': 10},
- mean: 0.95075, std: 0.00816, params: {'kernel': 'linear', 'C': 100}]--------------------------------------------------------------------------------------------------
+[mean: 0.87950, std: 0.00977, params: {'kernel': 'linear', 'C': 1e-06},
+ mean: 0.95400, std: 0.00838, params: {'kernel': 'linear', 'C': 0.001},
+ mean: 0.95300, std: 0.00664, params: {'kernel': 'linear', 'C': 1},
+ mean: 0.93800, std: 0.00868, params: {'kernel': 'linear', 'C': 10},
+ mean: 0.93725, std: 0.00718, params: {'kernel': 'linear', 'C': 100},
+ mean: 0.93725, std: 0.00718, params: {'kernel': 'linear', 'C': 1000}]
 for C = 0.001 accuracy =
-0.964
+0.969
 recommended C value
 shape is  (1000, 1)
 --------------------------------------------------------------------------------------------------
+end@@@@@@@@@@@
+
 
 
 multi-class
@@ -22,10 +24,35 @@ multi-class
   % self.max_iter, ConvergenceWarning)
 Best parameters set: 
 {'kernel': 'linear', 'C': 1}
-[mean: 0.67895, std: 0.00394, params: {'kernel': 'linear', 'C': 1e-07},
- mean: 0.67895, std: 0.00394, params: {'kernel': 'linear', 'C': 1e-05},
- mean: 0.90825, std: 0.00625, params: {'kernel': 'linear', 'C': 0.001},
- mean: 0.92335, std: 0.00567, params: {'kernel': 'linear', 'C': 1},
- mean: 0.91200, std: 0.00455, params: {'kernel': 'linear', 'C': 10},
- mean: 0.91110, std: 0.00461, params: {'kernel': 'linear', 'C': 100},
- mean: 0.91110, std: 0.00461, params: {'kernel': 'linear', 'C': 1000}]
+[mean: 0.66985, std: 0.00920, params: {'kernel': 'linear', 'C': 1e-07},
+ mean: 0.66985, std: 0.00920, params: {'kernel': 'linear', 'C': 1e-05},
+ mean: 0.90780, std: 0.00394, params: {'kernel': 'linear', 'C': 0.001},
+ mean: 0.91760, std: 0.00483, params: {'kernel': 'linear', 'C': 1},
+ mean: 0.90745, std: 0.00375, params: {'kernel': 'linear', 'C': 10},
+ mean: 0.90610, std: 0.00304, params: {'kernel': 'linear', 'C': 100},
+ mean: 0.90610, std: 0.00304, params: {'kernel': 'linear', 'C': 1000}]
+0.898
+
+
+
+multi-class Rbf kernel
+# Scoring parameter is accuracy
+Best parameters set: 
+{'kernel': 'rbf', 'C': 10, 'gamma': 0.01}
+[mean: 0.96300, std: 0.00253, params: {'kernel': 'rbf', 'C': 1, 'gamma': 0.01},
+ mean: 0.19465, std: 0.00275, params: {'kernel': 'rbf', 'C': 1, 'gamma': 1},
+ mean: 0.10345, std: 0.00062, params: {'kernel': 'rbf', 'C': 1, 'gamma': 10},
+ mean: 0.97215, std: 0.00230, params: {'kernel': 'rbf', 'C': 10, 'gamma': 0.01},
+ mean: 0.20600, std: 0.00429, params: {'kernel': 'rbf', 'C': 10, 'gamma': 1},
+ mean: 0.10500, std: 0.00076, params: {'kernel': 'rbf', 'C': 10, 'gamma': 10},
+ mean: 0.97175, std: 0.00197, params: {'kernel': 'rbf', 'C': 100, 'gamma': 0.01},
+ mean: 0.20600, std: 0.00429, params: {'kernel': 'rbf', 'C': 100, 'gamma': 1},
+ mean: 0.10500, std: 0.00076, params: {'kernel': 'rbf', 'C': 100, 'gamma': 10}]
+for Cval = 10 accuracy is 
+/usr/local/lib/python2.7/dist-packages/sklearn/svm/base.py:224: ConvergenceWarning: Solver terminated early (max_iter=10000).  Consider pre-processing your data with StandardScaler or MinMaxScaler.
+  % self.max_iter, ConvergenceWarning)
+0.9782
+recommended C value
+shape is  (5000, 10)
+--------------------------------------------------------------------------------------------------
+end@@@@@@@@@@@
